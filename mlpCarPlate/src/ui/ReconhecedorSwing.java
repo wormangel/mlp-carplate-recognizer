@@ -35,8 +35,8 @@ public class ReconhecedorSwing extends JFrame implements NeuralNetListener {
 		getContentPane().add(btnTreinar);
 		btnValidar = new JButton("Validar as redes");
 		getContentPane().add(btnValidar);
-		btnVerificar = new JButton("Verificar placa de carro");
-		getContentPane().add(btnVerificar);
+		// btnVerificar = new JButton("Verificar placa de carro");
+		//getContentPane().add(btnVerificar);
 	}
 	
 

@@ -26,7 +26,6 @@ import org.joone.net.NeuralNet;
  */
 public class ReconhecedorDePlacasMLP {
 
-	private final int tamanhoDownSample = 15 * 10;
 	private final int numeroDeSaidasLetra = 17; // Excluindo 9 letras
 	private final int numeroDeSaidasNumero = 10;
 	
