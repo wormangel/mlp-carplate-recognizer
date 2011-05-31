@@ -2,16 +2,20 @@ package test;
 
 import java.io.IOException;
 
+import org.joone.engine.Monitor;
+import org.joone.engine.NeuralNetEvent;
+import org.joone.engine.NeuralNetListener;
+
 import core.PreProcessador;
 import core.ReconhecedorDePlacasMLP;
 
-public class MockMain {
+public class MockMain implements NeuralNetListener {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		ReconhecedorDePlacasMLP rec = new ReconhecedorDePlacasMLP();
 		//rec.inicializaRedes();
 		
-		int[] x = PreProcessador.ProcessaImagem("C:\\temp\\plc\\001\\1.jpg");
+		int[] x = PreProcessador.ProcessaImagem("C:\\temp\\porFuncao\\treinamento\\3\\4.jpg");
 		double count = 0;
 		for (int i : x){
 			System.out.print(i + ";");
@@ -22,6 +26,37 @@ public class MockMain {
 		}
 		//String xstr = new ReconhecedorDePlacasMLP().
 		//System.out.println(x.);
+	}
+
+	@Override
+	public void cicleTerminated(NeuralNetEvent e) {
+		System.out.println("Ciclo terminado." + e.getSource());
+		
+	}
+
+	@Override
+	public void errorChanged(NeuralNetEvent e) {
+		Monitor mon = (Monitor)e.getSource();
+        System.out.println("Ciclo: "+(mon.getTotCicles()-mon.getCurrentCicle())+" RMSE:"+mon.getGlobalError());
+		
+	}
+
+	@Override
+	public void netStarted(NeuralNetEvent e) {
+		System.out.println("Treinando...");
+		
+	}
+
+	@Override
+	public void netStopped(NeuralNetEvent e) {
+		System.out.println("Treinado!");
+		
+	}
+
+	@Override
+	public void netStoppedError(NeuralNetEvent e, String error) {
+		System.out.println("Erro! " + error);
+		
 	}
 
 }
