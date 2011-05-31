@@ -25,7 +25,7 @@ public class Util {
     public static String converteArrayDeBitsParaString(int[] entrada){
 		StringBuilder str = new StringBuilder();
     	for(int i = 0; i < entrada.length; i++){
-    		str.append(entrada.toString());
+    		str.append(String.valueOf(entrada[i]));
     		str.append(";");
     	}
     	str.deleteCharAt(str.length()-1);
@@ -33,64 +33,64 @@ public class Util {
 	}
     
     public static String converteDeLetraParaArrayDeBits(String letra) {
-		if (letra == "A")
+		if (letra.equals("A"))
 			return SAIDA_ESPERADA_A;
-		if (letra == "B")
+		if (letra.equals("B"))
 			return SAIDA_ESPERADA_B;
-		if (letra == "C")
+		if (letra.equals("C"))
 			return SAIDA_ESPERADA_C;
-		if (letra == "D")
+		if (letra.equals("D"))
 			return SAIDA_ESPERADA_D;
-		if (letra == "F")
+		if (letra.equals("F"))
 			return SAIDA_ESPERADA_F;
-		if (letra == "G")
+		if (letra.equals("G"))
 			return SAIDA_ESPERADA_G;
-		if (letra == "I")
+		if (letra.equals("I"))
 			return SAIDA_ESPERADA_I;
-		if (letra == "K")
+		if (letra.equals("K"))
 			return SAIDA_ESPERADA_K;
-		if (letra == "L")
+		if (letra.equals("L"))
 			return SAIDA_ESPERADA_L;
-		if (letra == "M")
+		if (letra.equals("M"))
 			return SAIDA_ESPERADA_M;
-		if (letra == "N")
+		if (letra.equals("N"))
 			return SAIDA_ESPERADA_N;
-		if (letra == "O")
+		if (letra.equals("O"))
 			return SAIDA_ESPERADA_O;
-		if (letra == "P")
+		if (letra.equals("P"))
 			return SAIDA_ESPERADA_P;
-		if (letra == "R")
+		if (letra.equals("R"))
 			return SAIDA_ESPERADA_R;
-		if (letra == "U")
+		if (letra.equals("U"))
 			return SAIDA_ESPERADA_U;
-		if (letra == "Y")
+		if (letra.equals("Y"))
 			return SAIDA_ESPERADA_Y;
-		if (letra == "Z")
+		if (letra.equals("Z"))
 			return SAIDA_ESPERADA_Z;
 		
 		return null;
 	}
 
     public static String converteDeNumeroParaArrayDeBits(String numero) {
-		if (numero == "0")
+		if (numero.equals("0"))
 			return SAIDA_ESPERADA_0;
-		if (numero == "1")
+		if (numero.equals("1"))
 			return SAIDA_ESPERADA_1;
-		if (numero == "2")
+		if (numero.equals("2"))
 			return SAIDA_ESPERADA_2;
-		if (numero == "3")
+		if (numero.equals("3"))
 			return SAIDA_ESPERADA_3;
-		if (numero == "4")
+		if (numero.equals("4"))
 			return SAIDA_ESPERADA_4;
-		if (numero == "5")
+		if (numero.equals("5"))
 			return SAIDA_ESPERADA_5;
-		if (numero == "6")
+		if (numero.equals("6"))
 			return SAIDA_ESPERADA_6;
-		if (numero == "7")
+		if (numero.equals("7"))
 			return SAIDA_ESPERADA_7;
-		if (numero == "8")
+		if (numero.equals("8"))
 			return SAIDA_ESPERADA_8;
-		if (numero == "9")
+		if (numero.equals("9"))
 			return SAIDA_ESPERADA_9;
 		
 		return null;
