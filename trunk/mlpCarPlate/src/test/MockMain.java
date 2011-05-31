@@ -13,8 +13,6 @@ public class MockMain implements NeuralNetListener {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		MockMain mock = new MockMain();
-		
-
 	}
 	
 	public MockMain() throws IOException, InterruptedException{
