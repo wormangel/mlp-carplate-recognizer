@@ -1,0 +1,44 @@
+Dados
+Só foram considerados caracteres com no mínimo 3 amostras (pior caso)
+
+Letra - Quantidade de amostras
+
+A - 11 amostras
+B - 7 amostras
+C - 3 amostras
+D - 8 amostras
+E - 2 amostras *
+F - 4 amostras
+G - 5 amostras
+H - 1 amostras *
+I - 6 amostras
+J - 2 amostras *
+K - 12 amostras
+L - 41 amostras
+M - 3 amostras
+N - 18 amostras
+O - 13 amostras
+P - 3 amostras
+Q - 2 amostras *
+R - 4 amostras
+S - 1 amostras *
+T - 1 amostras *
+U - 4 amostras
+V - 1 amostras *
+W - 1 amostras *
+X - 0 amostras *
+Y - 3 amostras
+Z - 3
+
+Números - Quantidade de amostras
+
+0 - 11 amostras
+1 - 19 amostras 
+2 - 24 amostras
+3 - 21 amostras
+4 - 14 amostras
+5 - 19 amostras 
+6 - 25 amostras 
+7 - 34 amostras 
+8 - 25 amostras 
+9 - 23 amostras 
