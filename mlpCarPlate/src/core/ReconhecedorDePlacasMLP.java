@@ -29,8 +29,10 @@ public class ReconhecedorDePlacasMLP {
 	private final int numeroDeSaidasLetra = 17; // Excluindo 9 letras
 	private final int numeroDeSaidasNumero = 10;
 	
-	private final String diretorioArquivosTreinamento = "C:\\temp\\porFuncao\\treinamento";
-	private final String diretorioArquivosValidacao = "C:\\temp\\porFuncao\\validacao";
+	private final String diretorioArquivosTreinamentoLetras = "C:\\temp\\porFuncao\\treinamento\\letras";
+	private final String diretorioArquivosTreinamentoNumeros = "C:\\temp\\porFuncao\\treinamento\\numeros";
+	private final String diretorioArquivosValidacaoLetras = "C:\\temp\\porFuncao\\validacao\\letras";
+	private final String diretorioArquivosValidacaoNumeros = "C:\\temp\\porFuncao\\validacao\\numeros";
 	
 	private final String arquivoEntradaTreinamentoLetras = "C:\\temp\\inputTreinamentoLetras.txt";
 	private final String arquivoSaidaTreinamentoLetras = "C:\\temp\\outputTreinamentoLetras.txt";
@@ -354,6 +356,8 @@ public class ReconhecedorDePlacasMLP {
 	}
 	
 	public void adicionaListener(NeuralNetListener listener){
+		inicializaRedes();
+		
 		redeAlfabeto.addNeuralNetListener(listener);
 		redeNumeros.addNeuralNetListener(listener);
 	}
@@ -368,7 +372,7 @@ public class ReconhecedorDePlacasMLP {
 	}
 
 	private void geraArquivosDeTreinamentoParaLetras() throws IOException, InterruptedException{
-		File diretoriosTreinamento = new File(diretorioArquivosTreinamento);
+		File diretoriosTreinamento = new File(diretorioArquivosTreinamentoLetras);
 
 		File inputTreinamento = new File(arquivoEntradaTreinamentoLetras);
 		FileWriter writerInput = new FileWriter(inputTreinamento);
@@ -380,10 +384,16 @@ public class ReconhecedorDePlacasMLP {
 		
 		// Pra cada diretório (letra) no diretório de treinamento
 		for (String dirLetra : diretoriosTreinamento.list()) {
+			if (dirLetra.equals(".svn") || dirLetra.length() > 1){
+				continue;
+			}
 			// Obtém a lista de imagens no diretório dessa letra
-			File dirComImagensDaLetra = new File(diretorioArquivosTreinamento + "\\" + dirLetra);
+			File dirComImagensDaLetra = new File(diretorioArquivosTreinamentoLetras + "\\" + dirLetra);
 			// Pra cada imagem dessa letra
 			for (String arquivoImagem : dirComImagensDaLetra.list()) {
+				if (arquivoImagem.contains("svn")){
+					continue;
+				}
 				// Faz downsample e converte para array de ints
 				int[] imagemEmBits = preProcessa(dirComImagensDaLetra + "\\" + arquivoImagem);
 				// Converte para string e escreve no arquivo de entrada
@@ -399,7 +409,7 @@ public class ReconhecedorDePlacasMLP {
 	}
 
 	private void geraArquivosDeTreinamentoParaNumeros() throws IOException, InterruptedException{
-		File diretoriosTreinamento = new File(diretorioArquivosTreinamento);
+		File diretoriosTreinamento = new File(diretorioArquivosTreinamentoNumeros);
 
 		File inputTreinamento = new File(arquivoEntradaTreinamentoNumeros);
 		FileWriter writerInput = new FileWriter(inputTreinamento);
@@ -411,10 +421,16 @@ public class ReconhecedorDePlacasMLP {
 		
 		// Pra cada diretório (número) no diretório de treinamento
 		for (String dirNumero : diretoriosTreinamento.list()) {
+			if (dirNumero.equals(".svn") || dirNumero.length() > 1){
+				continue;
+			}
 			// Obtém a lista de imagens no diretório dessa letra
-			File dirComImagensDoNumero = new File(diretorioArquivosTreinamento + "\\" + dirNumero);
+			File dirComImagensDoNumero = new File(diretorioArquivosTreinamentoNumeros + "\\" + dirNumero);
 			// Pra cada imagem dessa número
 			for (String arquivoImagem : dirComImagensDoNumero.list()) {
+				if (arquivoImagem.contains("svn")){
+					continue;
+				}
 				// Faz downsample e converte para array de ints
 				int[] imagemEmBits = preProcessa(dirComImagensDoNumero + "\\" + arquivoImagem);
 				// Converte para string e escreve no arquivo de entrada

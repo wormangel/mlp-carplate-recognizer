@@ -12,13 +12,15 @@ import core.ReconhecedorDePlacasMLP;
 public class MockMain implements NeuralNetListener {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
-		ReconhecedorDePlacasMLP rec = new ReconhecedorDePlacasMLP();
-		rec.inicializaRedes();
+		MockMain mock = new MockMain();
 		
-		//testaDownSample();
+
+	}
+	
+	public MockMain() throws IOException, InterruptedException{
+		ReconhecedorDePlacasMLP rec = new ReconhecedorDePlacasMLP(this);
 		
-		String xstr = new ReconhecedorDePlacasMLP().
-		System.out.println(x.);
+		rec.treinaRedes();
 	}
 	
 	public static void testaDownSample() throws IOException, InterruptedException{
