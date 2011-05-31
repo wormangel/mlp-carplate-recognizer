@@ -34,66 +34,94 @@ public class Util {
     
     public static String converteDeLetraParaArrayDeBits(String letra) {
 		if (letra == "A")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_A;
+			return SAIDA_ESPERADA_A;
 		if (letra == "B")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_B;
+			return SAIDA_ESPERADA_B;
 		if (letra == "C")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_C;
+			return SAIDA_ESPERADA_C;
 		if (letra == "D")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_D;
+			return SAIDA_ESPERADA_D;
 		if (letra == "F")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_F;
+			return SAIDA_ESPERADA_F;
 		if (letra == "G")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_G;
+			return SAIDA_ESPERADA_G;
 		if (letra == "I")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_I;
+			return SAIDA_ESPERADA_I;
 		if (letra == "K")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_K;
+			return SAIDA_ESPERADA_K;
 		if (letra == "L")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_L;
+			return SAIDA_ESPERADA_L;
 		if (letra == "M")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_M;
+			return SAIDA_ESPERADA_M;
 		if (letra == "N")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_N;
+			return SAIDA_ESPERADA_N;
 		if (letra == "O")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_O;
+			return SAIDA_ESPERADA_O;
 		if (letra == "P")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_P;
+			return SAIDA_ESPERADA_P;
 		if (letra == "R")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_R;
+			return SAIDA_ESPERADA_R;
 		if (letra == "U")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_U;
+			return SAIDA_ESPERADA_U;
 		if (letra == "Y")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_Y;
+			return SAIDA_ESPERADA_Y;
 		if (letra == "Z")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_Z;
+			return SAIDA_ESPERADA_Z;
 		
 		return null;
 	}
 
     public static String converteDeNumeroParaArrayDeBits(String numero) {
 		if (numero == "0")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_0;
+			return SAIDA_ESPERADA_0;
 		if (numero == "1")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_1;
+			return SAIDA_ESPERADA_1;
 		if (numero == "2")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_2;
+			return SAIDA_ESPERADA_2;
 		if (numero == "3")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_3;
+			return SAIDA_ESPERADA_3;
 		if (numero == "4")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_4;
+			return SAIDA_ESPERADA_4;
 		if (numero == "5")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_5;
+			return SAIDA_ESPERADA_5;
 		if (numero == "6")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_6;
+			return SAIDA_ESPERADA_6;
 		if (numero == "7")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_7;
+			return SAIDA_ESPERADA_7;
 		if (numero == "8")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_8;
+			return SAIDA_ESPERADA_8;
 		if (numero == "9")
-			return ReconhecedorDePlacasMLP.SAIDA_ESPERADA_9;
+			return SAIDA_ESPERADA_9;
 		
 		return null;
 	}
 
+    public static String SAIDA_ESPERADA_A = "1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_B = "0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_C = "0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_D = "0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_F = "0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_G = "0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_I = "0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_K = "0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_L = "0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_M = "0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_N = "0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_O = "0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_P = "0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0";
+	public static String SAIDA_ESPERADA_R = "0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0";
+	public static String SAIDA_ESPERADA_U = "0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0";
+	public static String SAIDA_ESPERADA_Y = "0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0";
+	public static String SAIDA_ESPERADA_Z = "0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1";
+	
+	public static String SAIDA_ESPERADA_0 = "1;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_1 = "0;1;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_2 = "0;0;1;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_3 = "0;0;0;1;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_4 = "0;0;0;0;1;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_5 = "0;0;0;0;0;1;0;0;0;0";
+	public static String SAIDA_ESPERADA_6 = "0;0;0;0;0;0;1;0;0;0";
+	public static String SAIDA_ESPERADA_7 = "0;0;0;0;0;0;0;1;0;0";
+	public static String SAIDA_ESPERADA_8 = "0;0;0;0;0;0;0;0;1;0";
+	public static String SAIDA_ESPERADA_9 = "0;0;0;0;0;0;0;0;0;1";
 }
