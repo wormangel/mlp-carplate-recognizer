@@ -428,34 +428,4 @@ public class ReconhecedorDePlacasMLP {
 		writerInput.close();
 		writerOutput.close();	
 	}
-	
-	public static String SAIDA_ESPERADA_A = "1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_B = "0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_C = "0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_D = "0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_F = "0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_G = "0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_I = "0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_K = "0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_L = "0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_M = "0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_N = "0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_O = "0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_P = "0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0";
-	public static String SAIDA_ESPERADA_R = "0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0";
-	public static String SAIDA_ESPERADA_U = "0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0";
-	public static String SAIDA_ESPERADA_Y = "0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0";
-	public static String SAIDA_ESPERADA_Z = "0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1";
-	
-	public static String SAIDA_ESPERADA_0 = "1;0;0;0;0;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_1 = "0;1;0;0;0;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_2 = "0;0;1;0;0;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_3 = "0;0;0;1;0;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_4 = "0;0;0;0;1;0;0;0;0;0";
-	public static String SAIDA_ESPERADA_5 = "0;0;0;0;0;1;0;0;0;0";
-	public static String SAIDA_ESPERADA_6 = "0;0;0;0;0;0;1;0;0;0";
-	public static String SAIDA_ESPERADA_7 = "0;0;0;0;0;0;0;1;0;0";
-	public static String SAIDA_ESPERADA_8 = "0;0;0;0;0;0;0;0;1;0";
-	public static String SAIDA_ESPERADA_9 = "0;0;0;0;0;0;0;0;0;1";
-	
 }

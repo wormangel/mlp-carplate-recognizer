@@ -13,8 +13,15 @@ public class MockMain implements NeuralNetListener {
 
 	public static void main(String[] args) throws IOException, InterruptedException {
 		ReconhecedorDePlacasMLP rec = new ReconhecedorDePlacasMLP();
-		//rec.inicializaRedes();
+		rec.inicializaRedes();
 		
+		//testaDownSample();
+		
+		String xstr = new ReconhecedorDePlacasMLP().
+		System.out.println(x.);
+	}
+	
+	public static void testaDownSample() throws IOException, InterruptedException{
 		int[] x = PreProcessador.ProcessaImagem("C:\\temp\\porFuncao\\treinamento\\3\\4.jpg");
 		double count = 0;
 		for (int i : x){
@@ -24,8 +31,6 @@ public class MockMain implements NeuralNetListener {
 				System.out.println();
 			}
 		}
-		//String xstr = new ReconhecedorDePlacasMLP().
-		//System.out.println(x.);
 	}
 
 	@Override
