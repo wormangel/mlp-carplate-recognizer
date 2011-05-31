@@ -196,7 +196,7 @@ public class ReconhecedorDePlacasMLP {
 		inputSynapse1.setName("input1");
 		inputSynapse1.setAdvancedColumnSelector("1-150");
 		inputSynapse1.setFirstRow(1);
-		inputSynapse1.setLastRow(26); // 26 letras
+		inputSynapse1.setLastRow(54); // 26 letras - 9 excluídas
 
 		// Coloca esta sinapse como entrada da camada de entrada
 		redeAlfabeto.getInputLayer().addInputSynapse(inputSynapse1);
@@ -208,7 +208,7 @@ public class ReconhecedorDePlacasMLP {
 		desiredSynapse1.setName("desired1");
 		desiredSynapse1.setAdvancedColumnSelector("1-150");
 		desiredSynapse1.setFirstRow(1);
-		desiredSynapse1.setLastRow(26);
+		desiredSynapse1.setLastRow(54);
 
 		TeachingSynapse trainer = new TeachingSynapse();
 		trainer.setDesired(desiredSynapse1);
@@ -223,8 +223,8 @@ public class ReconhecedorDePlacasMLP {
         // set the monitor parameters
         monitor.setLearningRate(0.8);
         monitor.setMomentum(0.3);
-        monitor.setTrainingPatterns(26);
-        monitor.setTotCicles(2000);
+        monitor.setTrainingPatterns(54);
+        monitor.setTotCicles(150);
         monitor.setLearning(true);
         redeAlfabeto.go(true);
         System.out.println("Network stopped. Last RMSE="+redeAlfabeto.getMonitor().getGlobalError());
@@ -241,7 +241,7 @@ public class ReconhecedorDePlacasMLP {
 		inputSynapse1.setName("input1");
 		inputSynapse1.setAdvancedColumnSelector("1-150");
 		inputSynapse1.setFirstRow(1);
-		inputSynapse1.setLastRow(10); // 10 dígitos
+		inputSynapse1.setLastRow(76); // 10 dígitos
 
 		// Coloca esta sinapse como entrada da camada de entrada
 		redeNumeros.getInputLayer().addInputSynapse(inputSynapse1);
@@ -253,7 +253,7 @@ public class ReconhecedorDePlacasMLP {
 		desiredSynapse1.setName("desired1");
 		desiredSynapse1.setAdvancedColumnSelector("1-150");
 		desiredSynapse1.setFirstRow(1);
-		desiredSynapse1.setLastRow(26);
+		desiredSynapse1.setLastRow(76);
 
 		TeachingSynapse trainer = new TeachingSynapse();
 		trainer.setDesired(desiredSynapse1);
@@ -268,8 +268,8 @@ public class ReconhecedorDePlacasMLP {
         // set the monitor parameters
         monitor.setLearningRate(0.8);
         monitor.setMomentum(0.3);
-        monitor.setTrainingPatterns(26);
-        monitor.setTotCicles(2000);
+        monitor.setTrainingPatterns(76);
+        monitor.setTotCicles(150);
         monitor.setLearning(true);
         redeNumeros.go(true);
         System.out.println("Network stopped. Last RMSE="+redeNumeros.getMonitor().getGlobalError());
@@ -291,7 +291,7 @@ public class ReconhecedorDePlacasMLP {
 		// Tamanhos
 		input.setRows(150); // 10x15 pixels cada caractere
 		hidden.setRows(100);
-		output.setRows(26);
+		output.setRows(17);
 
 		input.setLayerName("inputLayer");
 		hidden.setLayerName("hiddenLayer");
@@ -328,7 +328,7 @@ public class ReconhecedorDePlacasMLP {
 		// Tamanhos
 		input.setRows(150); // 10x15 pixels cada caractere
 		hidden.setRows(100);
-		output.setRows(26);
+		output.setRows(10);
 
 		input.setLayerName("inputLayer");
 		hidden.setLayerName("hiddenLayer");
