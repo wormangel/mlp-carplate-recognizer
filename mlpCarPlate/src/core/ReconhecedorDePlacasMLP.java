@@ -3,6 +3,8 @@ package core;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.joone.engine.FullSynapse;
 import org.joone.engine.LinearLayer;
@@ -11,7 +13,6 @@ import org.joone.engine.NeuralNetListener;
 import org.joone.engine.SigmoidLayer;
 import org.joone.engine.learning.TeachingSynapse;
 import org.joone.io.FileInputSynapse;
-import org.joone.io.FileOutputSynapse;
 import org.joone.io.MemoryOutputSynapse;
 import org.joone.net.NeuralNet;
 
@@ -25,6 +26,13 @@ import org.joone.net.NeuralNet;
  */
 public class ReconhecedorDePlacasMLP {
 
+	private final int tamanhoDownSample = 15 * 10;
+	private final int numeroDeSaidasLetra = 17; // Excluindo 9 letras
+	private final int numeroDeSaidasNumero = 10;
+	
+	private final String diretorioArquivosTreinamento = "C:\\temp\\porFuncao\\treinamento";
+	private final String diretorioArquivosValidacao = "C:\\temp\\porFuncao\\validacao";
+	
 	private final String arquivoEntradaTreinamentoLetras = "C:\\temp\\inputTreinamentoLetras.txt";
 	private final String arquivoSaidaTreinamentoLetras = "C:\\temp\\outputTreinamentoLetras.txt";
 	private final String arquivoEntradaTreinamentoNumeros = "C:\\temp\\inputTreinamentoNumeros.txt";
@@ -33,7 +41,7 @@ public class ReconhecedorDePlacasMLP {
 	private NeuralNet redeAlfabeto = null;
 	private NeuralNet redeNumeros = null;
 	
-    public static void main(String args[]) {
+    public static void main(String args[]) throws IOException, InterruptedException {
     	ReconhecedorDePlacasMLP rec = new ReconhecedorDePlacasMLP();
         
         rec.inicializaRedes();
@@ -74,7 +82,7 @@ public class ReconhecedorDePlacasMLP {
 		inputSynapse1.setName("input1");
 		inputSynapse1.setAdvancedColumnSelector("1-150");
 		inputSynapse1.setFirstRow(1);
-		inputSynapse1.setLastRow(10); // 10 números
+		inputSynapse1.setLastRow(numeroDeSaidasNumero); // 10 números
 
 		// Coloca esta sinapse como entrada da camada de entrada
 		redeNumeros.getInputLayer().addInputSynapse(inputSynapse1);
@@ -94,7 +102,7 @@ public class ReconhecedorDePlacasMLP {
 		redeNumeros.go();
 		double[] resposta = outputSynapse1.getNextPattern();
 		
-		return PreProcessador.ConverteBitsParaNumero(resposta);
+		return Util.converteArrayDeBitsParaNumero(resposta);
 	}
     
 	/**
@@ -127,7 +135,7 @@ public class ReconhecedorDePlacasMLP {
 		inputSynapse1.setName("input1");
 		inputSynapse1.setAdvancedColumnSelector("1-150");
 		inputSynapse1.setFirstRow(1);
-		inputSynapse1.setLastRow(26); // 26 letras
+		inputSynapse1.setLastRow(numeroDeSaidasLetra); // 26 letras menos 9 excluídas
 
 		// Coloca esta sinapse como entrada da camada de entrada
 		redeAlfabeto.getInputLayer().addInputSynapse(inputSynapse1);
@@ -147,10 +155,10 @@ public class ReconhecedorDePlacasMLP {
 		redeAlfabeto.go();
 		double[] resposta = outputSynapse1.getNextPattern();
 		
-		return PreProcessador.ConverteBitsParaLetra(resposta);
+		return Util.converteArrayDeBitsParaLetra(resposta);
 	}
 
-	public void treinaRedes() {		
+	public void treinaRedes() throws IOException, InterruptedException {		
     	treinaRedeAlfabeto();
     	treinaRedeNumeros();    	
     }
@@ -176,10 +184,10 @@ public class ReconhecedorDePlacasMLP {
     	return arquivoDeEntrada;
 	}
     
-    protected void treinaRedeAlfabeto(){
+    protected void treinaRedeAlfabeto() throws IOException, InterruptedException{
     	
     	// Prepara a entrada para o treinamento da rede
-    	File arquivoEntrada = geraArquivoEntrada();
+    	geraArquivosDeTreinamentoParaLetras();
     	
 		FileInputSynapse inputSynapse1 = new FileInputSynapse();
 
@@ -221,8 +229,11 @@ public class ReconhecedorDePlacasMLP {
         System.out.println("Network stopped. Last RMSE="+redeAlfabeto.getMonitor().getGlobalError());
     }
     
-    protected void treinaRedeNumeros(){
-    	// the input to the neural net
+    protected void treinaRedeNumeros() throws IOException, InterruptedException{
+    	
+    	// Prepara a entrada para o treinamento da rede
+    	geraArquivosDeTreinamentoParaNumeros();
+    	
 		FileInputSynapse inputSynapse1 = new FileInputSynapse();
 
 		inputSynapse1.setInputFile(new File(arquivoEntradaTreinamentoNumeros));
@@ -357,4 +368,95 @@ public class ReconhecedorDePlacasMLP {
 		adicionaListener(listener);
 	}
 
+	private void geraArquivosDeTreinamentoParaLetras() throws IOException, InterruptedException{
+		File diretoriosTreinamento = new File(diretorioArquivosTreinamento);
+
+		File inputTreinamento = new File(arquivoEntradaTreinamentoLetras);
+		FileWriter writerInput = new FileWriter(inputTreinamento);
+		writerInput.flush();
+		
+		File outputTreinamento = new File(arquivoSaidaTreinamentoLetras);
+		FileWriter writerOutput = new FileWriter(outputTreinamento);
+		writerOutput.flush();
+		
+		// Pra cada diretório (letra) no diretório de treinamento
+		for (String dirLetra : diretoriosTreinamento.list()) {
+			// Obtém a lista de imagens no diretório dessa letra
+			File dirComImagensDaLetra = new File(diretorioArquivosTreinamento + "\\" + dirLetra);
+			// Pra cada imagem dessa letra
+			for (String arquivoImagem : dirComImagensDaLetra.list()) {
+				// Faz downsample e converte para array de ints
+				int[] imagemEmBits = preProcessa(dirComImagensDaLetra + "\\" + arquivoImagem);
+				// Converte para string e escreve no arquivo de entrada
+				writerInput.write(Util.converteArrayDeBitsParaString(imagemEmBits) + "\n");
+				
+				// Escreve no arquivo de saída esperada a linha correspondente ao caractere
+				writerOutput.write(Util.converteDeLetraParaArrayDeBits(dirLetra) + "\n");
+			}
+		}
+		
+		writerInput.close();
+		writerOutput.close();		
+	}
+
+	private void geraArquivosDeTreinamentoParaNumeros() throws IOException, InterruptedException{
+		File diretoriosTreinamento = new File(diretorioArquivosTreinamento);
+
+		File inputTreinamento = new File(arquivoEntradaTreinamentoNumeros);
+		FileWriter writerInput = new FileWriter(inputTreinamento);
+		writerInput.flush();
+		
+		File outputTreinamento = new File(arquivoSaidaTreinamentoNumeros);
+		FileWriter writerOutput = new FileWriter(outputTreinamento);
+		writerOutput.flush();
+		
+		// Pra cada diretório (número) no diretório de treinamento
+		for (String dirNumero : diretoriosTreinamento.list()) {
+			// Obtém a lista de imagens no diretório dessa letra
+			File dirComImagensDoNumero = new File(diretorioArquivosTreinamento + "\\" + dirNumero);
+			// Pra cada imagem dessa número
+			for (String arquivoImagem : dirComImagensDoNumero.list()) {
+				// Faz downsample e converte para array de ints
+				int[] imagemEmBits = preProcessa(dirComImagensDoNumero + "\\" + arquivoImagem);
+				// Converte para string e escreve no arquivo de entrada
+				writerInput.write(Util.converteArrayDeBitsParaString(imagemEmBits) + "\n");
+				
+				// Escreve no arquivo de saída esperada a linha correspondente ao caractere
+				writerOutput.write(Util.converteDeNumeroParaArrayDeBits(dirNumero) + "\n");
+			}
+		}
+		
+		writerInput.close();
+		writerOutput.close();	
+	}
+	
+	public static String SAIDA_ESPERADA_A = "1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_B = "0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_C = "0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_D = "0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_F = "0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_G = "0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_I = "0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_K = "0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_L = "0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_M = "0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_N = "0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_O = "0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_P = "0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0;0";
+	public static String SAIDA_ESPERADA_R = "0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0;0";
+	public static String SAIDA_ESPERADA_U = "0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0;0";
+	public static String SAIDA_ESPERADA_Y = "0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1;0";
+	public static String SAIDA_ESPERADA_Z = "0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;0;1";
+	
+	public static String SAIDA_ESPERADA_0 = "1;0;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_1 = "0;1;0;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_2 = "0;0;1;0;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_3 = "0;0;0;1;0;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_4 = "0;0;0;0;1;0;0;0;0;0";
+	public static String SAIDA_ESPERADA_5 = "0;0;0;0;0;1;0;0;0;0";
+	public static String SAIDA_ESPERADA_6 = "0;0;0;0;0;0;1;0;0;0";
+	public static String SAIDA_ESPERADA_7 = "0;0;0;0;0;0;0;1;0;0";
+	public static String SAIDA_ESPERADA_8 = "0;0;0;0;0;0;0;0;1;0";
+	public static String SAIDA_ESPERADA_9 = "0;0;0;0;0;0;0;0;0;1";
+	
 }

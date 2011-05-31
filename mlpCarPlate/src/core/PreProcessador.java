@@ -169,25 +169,5 @@ public class PreProcessador {
         return false;
     }
 
-    public static String ConverteBitsParaNumero(double[] resposta) {
-    	for (int i = 0; i<= resposta.length; i++){
-    		if (resposta[i] != 0) {
-    			int numero = i + 1;
-    			return String.valueOf(numero);
-    		}
-    	}
-		return null;
-	}
     
-    public static String ConverteBitsParaLetra(double[] resposta) {
-    	for (int i = 0; i<= resposta.length; i++){
-    		if (resposta[i] != 0) {
-    			int posicaoAscii = i + 65;
-    			return String.valueOf( (char) posicaoAscii );
-    		}
-    	}
-		return null;
-	}
-
-
 }
