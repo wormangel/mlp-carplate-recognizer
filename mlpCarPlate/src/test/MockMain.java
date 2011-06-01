@@ -11,14 +11,19 @@ import core.ReconhecedorDePlacasMLP;
 
 public class MockMain implements NeuralNetListener {
 
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] args) throws IOException, InterruptedException, ClassNotFoundException {
 		MockMain mock = new MockMain();
 	}
 	
-	public MockMain() throws IOException, InterruptedException{
+	public MockMain() throws IOException, InterruptedException, ClassNotFoundException{
 		ReconhecedorDePlacasMLP rec = new ReconhecedorDePlacasMLP(this);
 		
 		rec.treinaRedes();
+		
+		//rec.SalvarRede();
+		//rec.validaRedes();
+		
+		//System.out.println(rec.identificaNumero("C:\\temp\\porFuncao\\validacao\\letras\\A\\3 (2).jpg"));;
 	}
 	
 	public static void testaDownSample() throws IOException, InterruptedException{

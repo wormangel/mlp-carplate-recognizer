@@ -58,7 +58,7 @@ public class PreProcessador {
         pixelMap = (int[])grabber.getPixels();
         encontraBordas(w,h);
         
-        // now downsample
+        // calcula a proporçãod do downsample
         proporcaoDownSampleX = (double)(downSampleRight - downSampleLeft)/(double)tamanhoImagemDownSampleW;
         proporcaoDownSampleY = (double)(downSampleBottom - downSampleTop)/(double)tamanhoImagemDownSampleH;
         
@@ -70,35 +70,26 @@ public class PreProcessador {
                     downSample.setRGB(x,y,java.awt.Color.WHITE.getRGB());
             }
         }
-        
-        // We have now down sampled the current draw image to the downSample image.
-        // Now produce a large sclae version of the down sample so user can see it.
-        
-//        downsamplePreviewImage = downSample.getScaledInstance(getDrawSizeX(), getDrawSizeY(), java.awt.Image.SCALE_DEFAULT);
-//        if ( downsamplePreviewImage!= null) {
-//            ((ImageDrawer)DownsamplePanel).setImageToDraw(downsamplePreviewImage);
-//        }
-		
 	}
 
 	private static void encontraBordas(int w, int h){
 		// cima
         for ( int y=0;y<h;y++ ) {
-            if ( !hLineClear(y) ) {
+            if ( !linhaHorizontalEstahVazia(y) ) {
                 downSampleTop=y;
                 break;
             }
         }
         // baixo
         for ( int y=h-1;y>=0;y-- ) {
-            if ( !hLineClear(y) ) {
+            if ( !linhaHorizontalEstahVazia(y) ) {
                 downSampleBottom=y;
                 break;
             }
         }
         // esquerda
         for ( int x=0;x<w;x++ ) {
-            if ( !vLineClear(x) ) {
+            if ( !linhaVerticalEstahVazia(x) ) {
                 downSampleLeft = x;
                 break;
             }
@@ -106,7 +97,7 @@ public class PreProcessador {
         
         // direita
         for ( int x=w-1;x>=0;x-- ) {
-            if ( !vLineClear(x) ) {
+            if ( !linhaVerticalEstahVazia(x) ) {
                 downSampleRight = x;
                 break;
             }
@@ -117,7 +108,7 @@ public class PreProcessador {
      * Verifica se existem pixels na linha horizontal especificada.
      * Utilizado no método de encontrar bordas da imagem.
      */
-    private static boolean hLineClear(int y) {
+    private static boolean linhaHorizontalEstahVazia(int y) {
         int w = imagem.getWidth();
         for ( int i=0;i<w;i++ ) {
             if ( pixelMap[(y*w)+i] !=-1 )
@@ -130,7 +121,7 @@ public class PreProcessador {
      * Verifica se existem pixels na linha vertical especificada.
      * Utilizado no método de encontrar bordas da imagem.
      */
-    private static boolean vLineClear(int x) {
+    private static boolean linhaVerticalEstahVazia(int x) {
         int w = imagem.getWidth();
         int h = imagem.getHeight();
         for ( int i=0;i<h;i++ ) {
